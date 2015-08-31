@@ -8,43 +8,40 @@ The included tasks are:
 - Copy configuration files
 - Configure locale
 - Install and update Ubuntu packages
-- Create a user(sudoer), assigning groups and public keys
 - Basic security configuration:
     * Disable SSH root access
     * Disable password authentication
     * Install Fail2ban
-- Install and configure Nullmailer with Mandrill
 
-Forked from https://github.com/diec123/ansible-bootstrap and modified.
+Forked from https://github.com/mozodev/bootstrap-ubuntu and modified, which in turn was
+forked from https://github.com/diec123/ansible-bootstrap and modified.
 
 
 Requirements
 ------------
-[Ansible](https://github.com/ansible/ansible) (1.2 above)
+[Ansible](https://github.com/ansible/ansible) (1.4 above)
 
 
 Role Variables
 --------------
 
 ```
-locale: en_GB.UTF-8
-language: 'en_GB:en'
-timezone: Europe/London
-
-user_name: deploy
-user_password: password
-user_public_keys:
-  - public_key1
-  - public_key2 ....
+locale: en_US.UTF-8
+language: 'en_US:en'
+timezone: US/Pacific
 
 ssh_port: 22
 
-mandrill_user: user
-mandrill_api_key: key
-
-nullmailler_admin_mail: mail
-nullmailer_domain: domain
+common_system_packages:
+    - curl
+    - wget
+    - build-essential
+    - python-software-properties
+    - mcrypt
+    - git
 ```
+
+Note: if a list variable named required_system_packages exists in the parent playbook, the contents of that list will be merged into `common_system_packages` at the point when system packages are installed.
 
 Dependencies
 ------------
@@ -56,11 +53,9 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: mozodev.bootstrap-ubuntu }
+         - { role: dltj.bootstrap-ubuntu }
 
 License
 -------
 
 MIT License
-
-

@@ -3,7 +3,7 @@ galaxy_info:
   author: Yeongtaek Hong
   description: Bootstrap for ubuntu server
   license: MIT License
-  min_ansible_version: 1.2
+  min_ansible_version: 1.4
 
   platforms:
   - name: Ubuntu

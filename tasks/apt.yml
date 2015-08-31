@@ -1,13 +1,19 @@
 ---
-- apt: update_cache=yes
 
-- apt: pkg=git,git-core,build-essential,libpq-dev,libreadline-dev state=present
-- apt: pkg=python-pycurl,python-psycopg2 state=present
+- name: Update Packages
+  sudo: yes
+  apt:
+    update_cache: yes
+    upgrade: safe
 
-- apt: pkg=libreadline6-dev,zlib1g-dev,libssl-dev,libyaml-dev,libsqlite3-dev,sqlite3,libxml2-dev,libxslt1-dev state=present
-- apt: pkg=autoconf,libgdbm-dev,libncurses5-dev,automake,libtool,bison,pkg-config,libffi-dev state=present
-- apt: pkg=locate,tree,ack-grep,htop,nmap,dlocate state=present
+- name: Install common system packages
+  sudo: yes
+  apt:
+    pkg: "{{ common_system_packages }}"
+    state: latest
 
-- apt: upgrade=yes
-
-
+- name: Install required system packages
+  sudo: yes
+  apt:
+    pkg: "{{ required_system_packages }}"
+    state: latest

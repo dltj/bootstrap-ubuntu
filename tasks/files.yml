@@ -1,4 +1,6 @@
 ---
 - name: Copy environment
-  template: src=environment dest=/etc/environment
-
+  sudo: yes
+  template:
+    src: environment
+    dest: /etc/environment

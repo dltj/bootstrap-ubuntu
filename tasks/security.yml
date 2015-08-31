@@ -1,15 +1,19 @@
 ---
 - name: Disallow root SSH access
+  sudo: yes
   action: lineinfile dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
   notify: restart ssh
 
 - name: Set SSH port
-  action: lineinfile dest=/etc/ssh/sshd_config regexp="^Port" line="Port {{port}}" state=present
+  sudo: yes
+  action: lineinfile dest=/etc/ssh/sshd_config regexp="^Port" line="Port {{ ssh_port }}" state=present
   notify: restart ssh
 
 - name: Disallow password authentication
+  sudo: yes
   lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
   notify: restart ssh
 
 - name: Install fail2ban
+  sudo: yes
   apt: pkg=fail2ban state=present

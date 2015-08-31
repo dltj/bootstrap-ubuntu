@@ -1,12 +1,22 @@
 # based on https://github.com/hatoishi/ansible-dev/blob/master/common/tasks/main.yml
 - name: generate locale
+  sudo: yes
   command: /usr/sbin/locale-gen {{locale}}
+
 - name: set locale
+  sudo: yes
   command: /usr/sbin/update-locale LANG={{locale}} LC_ALL={{locale}} LANGUAGE={{language}}
+
 - name: set /etc/localtime
-  command: /bin/cp /usr/share/zoneinfo/{{timezone}} /etc/localtime
+  sudo: yes
+  file:
+    src: /usr/share/zoneinfo/{{timezone}}
+    dest: /etc/localtime
+    state: link
+
 - name: set /etc/timezone
-  template: src=timezone dest=/etc/timezone
+  sudo: yes
+  template:
+    src: timezone
+    dest: /etc/timezone
   notify: update tzdata
-
-
