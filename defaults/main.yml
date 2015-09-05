@@ -8,11 +8,17 @@ timezone: US/Pacific
 ssh_port: 22
 
 common_system_packages:
-  - curl
-  - wget
   - build-essential
-  - python-software-properties
-  - mcrypt
+  - curl
+  - fail2ban
   - git
+  - htop
+  - iftop
+  - iotop
+  - mcrypt
+  - python-software-properties
+  - uwf
+  - vim
+  - wget
 
 required_system_packages: []

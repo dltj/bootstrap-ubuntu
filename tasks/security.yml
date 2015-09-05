@@ -13,7 +13,3 @@
   sudo: yes
   lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
   notify: restart ssh
-
-- name: Install fail2ban
-  sudo: yes
-  apt: pkg=fail2ban state=present
